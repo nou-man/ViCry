@@ -30,6 +30,6 @@ def main():
     
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
-    cprint(figlet_format('Hero Man', font='slant'),'yellow', attrs=['bold'])
+    cprint(figlet_format('V !  C r y', font='slant'),'yellow', attrs=['bold'])
     cprint(figlet_format('AES Video Encryption Decryption', font='digital'),'green', attrs=['bold'])
     main()
