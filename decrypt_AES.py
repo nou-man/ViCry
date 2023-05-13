@@ -1,44 +1,31 @@
-# from Crypto.Cipher import AES
-
-# # Set the encryption key and block size
-# key = b'Sixteen byte key'
-# block_size = 16
-
-# # Open the encrypted video file and read the contents
-# with open('./encrypted_video/encrypted_video.mp4', 'rb') as f:
-#     ciphertext = f.read()
-
-# # Get the initialization vector from the beginning of the ciphertext
-# iv = ciphertext[:block_size]
-
-# # Create the AES cipher object with CBC mode
-# cipher = AES.new(key, AES.MODE_CBC, iv)
-
-# # Decrypt the ciphertext with the cipher object
-# plaintext = cipher.decrypt(ciphertext[block_size:])
-
-# # Remove padding from the plaintext
-# pad_len = plaintext[-1]
-# plaintext = plaintext[:-pad_len]
-
-# # Write the decrypted video to the output file
-# with open('./decrypted_video/decrypted_video.mp4', 'wb') as f:
-#     f.write(plaintext)
-
-
 from Crypto.Cipher import AES
+import phrase_decrypt
 import os
+import time
 
 def decrypt_video():
+
+    print("\n \033[33mDecryption in progress . . .\033[0m\n")
+    time.sleep(1)
+
+
     # Set the encryption key and block size
     # key = b'Sixteen byte key'
-    pass_phrase = input('Enter the video decryption key: ')
+    pass_phrase = phrase_decrypt.decrypt_phrase()
+    # print("The key is: ",pass_phrase)
     key = pass_phrase.encode('utf-8')
     block_size = 16
 
     # Set the input and output directories
     input_dir = './encrypted_video/'
     output_dir = './decrypted_video/'
+
+    #Giving manual delay of 3 seconds 
+    print("\n\n \033[33mVideo decryption in Progress\033[0m ", end="", flush=True)
+    for i in range(3):
+        print("\033[33m. \033[0m", end="", flush=True)  # print a dot without a newline and flush the buffer
+        time.sleep(1)  # wait for 1 second
+    print()  # print a newline to move to the next line
 
     # Iterate over the input directory and decrypt each file
     for filename in os.listdir(input_dir):
@@ -65,3 +52,9 @@ def decrypt_video():
         # Write the decrypted video to the output file
         with open(output_path, 'wb') as f:
             f.write(plaintext)
+
+        time.sleep(1)
+        # print(" Video decryption successful !")
+        print('\n\033[32m Video decryption successful !\033[0m')
+
+        time.sleep(2)

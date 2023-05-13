@@ -1,42 +1,23 @@
-# from Crypto.Cipher import AES
-# import os
-
-# # Set the encryption key and block size
-# key = b'Sixteen byte key'
-# block_size = 16
-
-# # Open the input video file and read the contents
-# with open('./source_video/video_test.mp4', 'rb') as f:
-#     plaintext = f.read()
-
-# # Add padding to the plaintext if necessary
-# pad_len = block_size - len(plaintext) % block_size
-# plaintext += pad_len * bytes([pad_len])
-
-# # Generate a random initialization vector
-# iv = os.urandom(block_size)
-
-# # Create the AES cipher object with CBC mode
-# cipher = AES.new(key, AES.MODE_CBC, iv)
-
-# # Encrypt the plaintext with the cipher object
-# ciphertext = iv + cipher.encrypt(plaintext)
-
-# # Write the encrypted video to the output file
-# with open('./encrypted_video/encrypted_video.mp4', 'wb') as f:
-#     f.write(ciphertext)
-
-
+import phrase_encrypt
 from Crypto.Cipher import AES
 import os
+import time
 
 def encrypt_video():
-    
+        
     # Set the encryption key and block size
-    pass_phrase = input('Enter the video encryption key: ')
-    key = pass_phrase.encode('utf-8')
+    key = phrase_encrypt.encrypt_phrase().encode('utf-8')
+    # key = pass_phrase.encode('utf-8')
     # key = b'Sixteen byte key'
     block_size = 16
+
+    #Giving manual delay of 3 seconds before encrypting video 
+    print("\n\033[33m Encrypting Video\033[0m ", end="", flush=True)
+    for i in range(3):
+        print("\033[33m.\033[0m", end="", flush=True)  # print a dot without a newline and flush the buffer
+        time.sleep(1)  # wait for 1 second
+    print()  # print a newline to move to the next line
+    print()  # print a newline to move to the next line
 
     # Set the input and output directories
     input_dir = './source_video/'
@@ -67,3 +48,10 @@ def encrypt_video():
         # Write the encrypted video to the output file
         with open(output_path, 'wb') as f:
             f.write(ciphertext)
+        
+        time.sleep(1)
+        # print("\nEncryption of Video was Successful !")
+        print('\033[32m Encryption of Video was Successful !\033[0m')
+        time.sleep(1)
+        print(" Encrypted Video moved to folder \033[32m'encrypted_video'\033[0m ..")
+        time.sleep(2)

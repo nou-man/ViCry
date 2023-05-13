@@ -8,6 +8,7 @@ import os
 
 def main():
     while(1):
+        print()
         cprint(figlet_format('MENU', font='digital'),'blue', attrs=['bold'])
         print("1> Encrypt Videos")
         print("2> Decrypt Videos")
@@ -30,5 +31,5 @@ def main():
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
     cprint(figlet_format('Hero Man', font='slant'),'yellow', attrs=['bold'])
-    cprint(figlet_format('AES encryted Video\n Encryption Decryption', font='digital'),'green', attrs=['bold'])
+    cprint(figlet_format('AES Video Encryption Decryption', font='digital'),'green', attrs=['bold'])
     main()
