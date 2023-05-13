@@ -11,6 +11,22 @@ def encrypt_video():
     # key = b'Sixteen byte key'
     block_size = 16
 
+    # Set the input and output directories
+    input_dir = './source_video/'
+    output_dir = './encrypted_video/'
+
+    # Check if the source video directory exists and is not empty
+    if not os.path.exists(input_dir):
+        print("\n \033[31mError: Source video folder not found!\033[0m")
+        return
+    elif not os.listdir(input_dir):
+        print(" \033[31mError: Source video directory is empty!\033[0m")
+        return
+
+    # Check if the output directory exists, create it if it doesn't
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
     #Giving manual delay of 3 seconds before encrypting video 
     print("\n\033[33m Encrypting Video\033[0m ", end="", flush=True)
     for i in range(3):
@@ -18,10 +34,6 @@ def encrypt_video():
         time.sleep(1)  # wait for 1 second
     print()  # print a newline to move to the next line
     print()  # print a newline to move to the next line
-
-    # Set the input and output directories
-    input_dir = './source_video/'
-    output_dir = './encrypted_video/'
 
     # Iterate over the input directory and encrypt each file
     for filename in os.listdir(input_dir):

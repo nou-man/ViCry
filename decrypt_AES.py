@@ -4,15 +4,11 @@ import os
 import time
 
 def decrypt_video():
-
-    print("\n \033[33mDecryption in progress . . .\033[0m\n")
-    time.sleep(1)
-
-
     # Set the encryption key and block size
-    # key = b'Sixteen byte key'
     pass_phrase = phrase_decrypt.decrypt_phrase()
-    # print("The key is: ",pass_phrase)
+    if not pass_phrase:
+        # print("\n\033[31mError: Key is empty!\033[0m")
+        return
     key = pass_phrase.encode('utf-8')
     block_size = 16
 
@@ -20,8 +16,20 @@ def decrypt_video():
     input_dir = './encrypted_video/'
     output_dir = './decrypted_video/'
 
-    #Giving manual delay of 3 seconds 
-    print("\n\n \033[33mVideo decryption in Progress\033[0m ", end="", flush=True)
+    # Check if the encrypted video directory exists and create it if it doesn't
+    if not os.path.exists(input_dir):
+        print("\n\033[31mError: encrypted_video directory not found!\033[0m")
+        return
+    elif not os.listdir(input_dir):
+        print("\n\033[31mError: encrypted_video directory is empty!\033[0m")
+        return
+
+    # Check if the decrypted video directory exists and create it if it doesn't
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+
+    # Giving manual delay of 3 seconds
+    print("\n\n \033[33mVideo decryption in progress \033[0m ", end="", flush=True)
     for i in range(3):
         print("\033[33m. \033[0m", end="", flush=True)  # print a dot without a newline and flush the buffer
         time.sleep(1)  # wait for 1 second
@@ -54,7 +62,5 @@ def decrypt_video():
             f.write(plaintext)
 
         time.sleep(1)
-        # print(" Video decryption successful !")
         print('\n\033[32m Video decryption successful !\033[0m')
-
         time.sleep(2)
