@@ -1,16 +1,25 @@
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
+# import os
+import secrets
 
 def encrypt_phrase():
     # Load the public key from a file
     with open('keys/public_key_5000.pem', 'rb') as f:
         public_key = RSA.import_key(f.read())
 
+    # Generate a 16-byte string of random bytes
+    rand_bytes = secrets.token_bytes(16)
+
+    # Print the byte string in hexadecimal format
+    print("The Key generated is: ",rand_bytes.hex())
+
     # Encrypt the phrase using the public key
-    phrase = input("Enter the pass-phrase with minimum 5 words: ")
+    phrase = rand_bytes.hex()
 
     # Condition set for minimum 5 words and each word must have 3 character
-    if phrase.count(' ') >= 4 and sum(len(word) >= 3 for word in phrase.split()) >= 5:
+    # if phrase.count(' ') >= 4 and sum(len(word) >= 3 for word in phrase.split()) >= 5:
+    if phrase != None:
         cipher = PKCS1_OAEP.new(public_key)
         encrypted_phrase = cipher.encrypt(phrase.encode())
 
