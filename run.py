@@ -1,10 +1,8 @@
 import encrypt_AES
 import decrypt_AES
-
 from termcolor import cprint 
 from pyfiglet import figlet_format
 import os
-
 
 def main():
     while(1):
@@ -24,12 +22,10 @@ def main():
             break
         else:
             print("Redefine your choice !!!")
-
-
       
     
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
-    cprint(figlet_format('V !  C r y', font='slant'),'yellow', attrs=['bold'])
+    cprint(figlet_format('V ! Cry', font='slant'),'yellow', attrs=['bold'])
     cprint(figlet_format('AES Video Encryption Decryption', font='digital'),'green', attrs=['bold'])
     main()
